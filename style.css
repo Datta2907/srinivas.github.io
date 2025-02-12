@@ -1,0 +1,642 @@
+* {
+    box-sizing: border-box;
+
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--bg-color);
+    transition: background 0.3s, color 0.3s;
+    color: var(--text-color);
+}
+
+.navigation {
+    display: inline;
+}
+
+.navbar {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 1%);
+    background-color: var(--content-color);
+    padding: 0px 20px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-color);
+    transition: box-shadow 0.3s ease-in-out;
+    z-index: 1000;
+    padding: 0px 20px;
+}
+
+.header.scrolled {
+    box-shadow: 0px 4px 10px rgba(var(--shadow-color), 0.4);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo a {
+    text-decoration: none;
+    color: var(--text-color)
+}
+
+.nav-link:hover {
+    color: #f4a261;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-link.active::after {
+    transform: scaleX(1);
+}
+
+.content {
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
+}
+
+.left-content {
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border-width: 0.5px;
+    border-color: var(--content-color);
+    margin-right: 50px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.name {
+    margin: 0;
+    font-size: 50px;
+}
+
+.description {
+    margin: 50px;
+}
+
+.right-content {
+    padding-top: 70px;
+    margin-right: 30px;
+    width: 30%;
+    border-width: 0.5px;
+    border-color: var(--content-color);
+    border-radius: 10px;
+}
+
+.profile {
+    border-radius: 50%;
+    width: 75%;
+    height: 80%;
+}
+
+.skills-section {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 50px;
+    text-align: left;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill {
+    width: 100%;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.skill span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.skill-fill {
+    height: 100%;
+    background: linear-gradient(to right, #4a90e2, #9013fe);
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
+}
+
+.experience-section {
+    margin: 0px 0px 0px 50px;
+    padding: 50px 0;
+}
+
+.experience {
+    display: flex;
+    margin-top: 50px;
+    align-items: center;
+}
+
+.exp-left {
+    position: relative;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.exp-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.exp-line {
+    width: 2px;
+    height: 220px;
+    background-color: #4a90e2;
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 1px);
+    z-index: 1;
+}
+
+.exp-right {
+    background: var(--bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    width: 80%;
+    margin-left: 15px;
+}
+
+.edu-images {
+    margin: 5% 15%;
+}
+
+.edu-text {
+    text-align: center;
+}
+
+.edu-image {
+    height: 40rem;
+    width: 100%;
+    border-radius: 2%;
+}
+
+.footer {
+    background-color: var(--bg-color);
+    padding: 50px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.footer-left a:hover {
+    color: #f4a261;
+}
+
+.footer-middle {
+    margin: 0;
+}
+
+.footer-right a {
+    margin-right: 40px;
+    color: var(--text-color);
+}
+
+
+.dark-mode {
+    --bg-color: #333333;
+    --content-color: black;
+    --text-color: white;
+    --shadow-color: 255, 255, 255;
+}
+
+.light-mode {
+    --bg-color: darkgrey;
+    --content-color: lightgrey;
+    --text-color: black;
+    --shadow-color: 0, 0, 0;
+}
+
+button#dark-mode-toggle-web {
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+button#dark-mode-toggle-mob {
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* about */
+
+.intro {
+    text-align: center;
+    margin: 10px 25px 50px 25px;
+}
+
+.about-line {
+    width: 2px;
+    height: 100px;
+    background-color: #4a90e2;
+    position: absolute;
+    top: 25px;
+    left: 24px;
+    z-index: 1;
+}
+
+.about-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    top: 25px;
+}
+
+.fun-facts {
+    margin: 30px;
+}
+
+.fun-facts ul {
+    list-style: none;
+    padding: 0;
+}
+
+.fun-facts ul li {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+/* Timeline */
+.project {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-image {
+    width: 50%;
+    height: 90%;
+    border-radius: 2%;
+}
+
+.timeline {
+    margin-top: 50px;
+    padding-left: 20px;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    z-index: 2;
+}
+
+.timeline-line {
+    width: 2px;
+    height: 190px;
+    background-color: #4a90e2;
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    z-index: 1;
+}
+
+.edu-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    z-index: 2;
+}
+
+.edu-line {
+    width: 2px;
+    height: 100px;
+    background-color: #4a90e2;
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    z-index: 1;
+}
+
+.timeline-item {
+    height: 30%;
+    display: flex;
+}
+
+.timeline-content {
+    display: block;
+    margin-left: 10px;
+}
+
+.timeline-content a {
+    text-decoration: none;
+    color: #f4a261;
+}
+
+/* Contact Section */
+.contact {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.contact a:hover {
+    color: #f4a261;
+}
+
+.social-icons img {
+    width: 30px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+/* contact */
+
+.contact-container {
+    padding: 10% 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    margin: 0px 50px;
+}
+
+.contact-item a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.contact-item a:hover {
+    color: #f4a261;
+}
+
+.icon-box {
+    width: 100px;
+    height: 100px;
+    background: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.icon-box i {
+    font-size: 20px;
+    color: var(--bg-color);
+}
+
+.about-image {
+    border-radius: 2%;
+    height: 100%;
+    width: 100%;
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+    .navigation {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+    }
+
+    body.menu-open {
+        margin-top: 250px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background: var(--bg-color);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 10px;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+    }
+
+    .nav-links.active {
+        display: flex;
+        max-height: 300px;
+        opacity: 1;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .name {
+        font-size: 30px;
+    }
+
+    .profile {
+        border-radius: 50%;
+        width: 100%;
+        height: 50%;
+    }
+
+    .content {
+        display: block;
+    }
+
+    .left-content {
+        margin: auto;
+    }
+
+    .right-content {
+        margin: auto;
+    }
+
+    .contact-container {
+        display: block;
+    }
+
+    .contact-item p {
+        width: 30%;
+    }
+
+    .experience-section {
+        margin: 0px 20px;
+    }
+
+    .exp-dot {
+        position: absolute;
+        left: 20px;
+    }
+
+    .project {
+        display: block;
+    }
+
+    .project-image {
+        margin: 20px 20px;
+        width: 75%;
+        height: 60%;
+    }
+
+    .timeline {
+        padding: 0px 5px;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: 5px;
+    }
+
+    .timeline-line {
+        left: 10px;
+        height: 350px;
+    }
+
+    .timeline-content {
+        margin-left: 40px;
+    }
+
+    .timeline-item p {
+        width: 70%;
+    }
+
+    .edu-line {
+        height: 150px;
+    }
+
+    .about-dot {
+        position: absolute;
+        left: 5px;
+    }
+
+    .about-line {
+        height: 160px;
+        left: 10px;
+    }
+
+    .footer-right a {
+        margin-right: 10px;
+    }
+
+    .footer-left {
+        margin-right: 10px;
+    }
+
+    .footer-right {
+        margin-left: 30px;
+    }
+
+    .edu-image {
+        position: relative;
+        left: -30px;
+        height: 20rem;
+        width: 20rem;
+    }
+}
