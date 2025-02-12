@@ -205,9 +205,8 @@ body {
 }
 
 .experience {
+    height: 30%;
     display: flex;
-    margin-top: 50px;
-    align-items: center;
 }
 
 .exp-left {
@@ -217,27 +216,7 @@ body {
     justify-content: center;
 }
 
-.exp-dot {
-    width: 12px;
-    height: 12px;
-    background-color: #4a90e2;
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
-}
-
-.exp-line {
-    width: 2px;
-    height: 220px;
-    background-color: #4a90e2;
-    position: absolute;
-    top: 0px;
-    left: calc(50% - 1px);
-    z-index: 1;
-}
-
 .exp-right {
-    background: var(--bg-color);
     padding: 15px;
     border-radius: 8px;
     width: 80%;
@@ -322,26 +301,6 @@ button#dark-mode-toggle-mob {
     margin: 10px 25px 50px 25px;
 }
 
-.about-line {
-    width: 2px;
-    height: 100px;
-    background-color: #4a90e2;
-    position: absolute;
-    top: 25px;
-    left: 24px;
-    z-index: 1;
-}
-
-.about-dot {
-    width: 12px;
-    height: 12px;
-    background-color: #4a90e2;
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
-    top: 25px;
-}
-
 .fun-facts {
     margin: 30px;
 }
@@ -387,28 +346,7 @@ button#dark-mode-toggle-mob {
 
 .timeline-line {
     width: 2px;
-    height: 190px;
-    background-color: #4a90e2;
-    position: absolute;
-    top: 30px;
-    left: 5px;
-    z-index: 1;
-}
-
-.edu-dot {
-    width: 12px;
-    height: 12px;
-    background-color: #4a90e2;
-    border-radius: 50%;
-    position: absolute;
-    top: 30px;
-    left: 0px;
-    z-index: 2;
-}
-
-.edu-line {
-    width: 2px;
-    height: 100px;
+    height: 100%;
     background-color: #4a90e2;
     position: absolute;
     top: 30px;
@@ -568,11 +506,6 @@ button#dark-mode-toggle-mob {
         margin: 0px 20px;
     }
 
-    .exp-dot {
-        position: absolute;
-        left: 20px;
-    }
-
     .project {
         display: block;
     }
@@ -593,7 +526,6 @@ button#dark-mode-toggle-mob {
 
     .timeline-line {
         left: 10px;
-        height: 350px;
     }
 
     .timeline-content {
@@ -602,20 +534,6 @@ button#dark-mode-toggle-mob {
 
     .timeline-item p {
         width: 70%;
-    }
-
-    .edu-line {
-        height: 150px;
-    }
-
-    .about-dot {
-        position: absolute;
-        left: 5px;
-    }
-
-    .about-line {
-        height: 160px;
-        left: 10px;
     }
 
     .footer-right a {
@@ -632,7 +550,5 @@ button#dark-mode-toggle-mob {
 
     .edu-image {
         position: relative;
-        left: -30px;
-        width: 20rem;
     }
 }
