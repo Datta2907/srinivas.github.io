@@ -253,7 +253,6 @@ body {
 }
 
 .edu-image {
-    height: 40rem;
     width: 100%;
     border-radius: 2%;
 }
@@ -366,7 +365,7 @@ button#dark-mode-toggle-mob {
 
 .project-image {
     width: 50%;
-    height: 90%;
+    margin: 10px;
     border-radius: 2%;
 }
 
@@ -495,7 +494,6 @@ button#dark-mode-toggle-mob {
 
 .about-image {
     border-radius: 2%;
-    height: 100%;
     width: 100%;
 }
 
@@ -582,7 +580,6 @@ button#dark-mode-toggle-mob {
     .project-image {
         margin: 20px 20px;
         width: 75%;
-        height: 60%;
     }
 
     .timeline {
@@ -636,7 +633,6 @@ button#dark-mode-toggle-mob {
     .edu-image {
         position: relative;
         left: -30px;
-        height: 20rem;
         width: 20rem;
     }
 }
