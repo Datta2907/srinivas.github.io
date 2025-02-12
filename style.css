@@ -500,7 +500,7 @@ button#dark-mode-toggle-mob {
 }
 
 /* Mobile */
-@media screen and (max-width: 768) {
+@media screen and (max-width: 600) {
     .navigation {
         display: none;
     }
