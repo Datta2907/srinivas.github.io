@@ -1,198 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <link rel="stylesheet" href="style.css">
-    <title>Projects</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project | Lost & Found App</title>
+    <link rel="stylesheet" href="style.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<script>
-    window.addEventListener("scroll", function () {
-        var header = document.getElementById("header");
-        if (window.scrollY > 1) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-        const menuToggleButton = document.querySelector(".menu-toggle");
-        const navMenu = document.querySelector(".nav-links");
-        const body = document.body;
-        const mobToggleButton = document.getElementById("dark-mode-toggle-mob");
-        const webToggleButton = document.getElementById("dark-mode-toggle-web");
-        const navLinks = document.querySelectorAll(".nav-link");
-        menuToggleButton.addEventListener("click", function () {
-            navMenu.classList.toggle("active");
-            body.classList.toggle("menu-open");
-        });
-        navLinks.forEach(link => {
-            if (link.href === window.location.href) {
-                link.classList.add("active");
+
+<body>
+    <script>
+        window.addEventListener("scroll", function () {
+            var header = document.getElementById("header");
+            if (window.scrollY > 1) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
             }
         });
-        // Function to update icon
-        function updateIcon(isDarkMode) {
-            mobToggleButton.innerHTML = isDarkMode ? "☀️" : "🌙";
-            webToggleButton.innerHTML = isDarkMode ? "☀️" : "🌙";
-        }
 
-        // Check localStorage for theme
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme == null) {
-            localStorage.setItem("theme", "light");
-            body.classList.add("light-mode");
-            updateIcon(false);
-        }
-        else if (savedTheme === "dark") {
-            body.classList.add("dark-mode");
-            updateIcon(true);
-        } else {
-            body.classList.add("light-mode");
-            updateIcon(false);
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggleButton = document.querySelector(".menu-toggle");
+            const navMenu = document.querySelector(".nav-links");
+            const body = document.body;
+            const mobToggleButton = document.getElementById("dark-mode-toggle-mob");
+            const webToggleButton = document.getElementById("dark-mode-toggle-web");
+            const navLinks = document.querySelectorAll(".nav-link");
 
-        // Toggle on button click
-        mobToggleButton.addEventListener("click", function () {
-            const isDarkMode = !(body.classList.value.includes("dark-mode"));
-            updateIcon(isDarkMode);
+            if (menuToggleButton) {
+                menuToggleButton.addEventListener("click", function () {
+                    navMenu.classList.toggle("active");
+                    body.classList.toggle("menu-open");
+                });
+            }
 
-            // Save theme preference
-            localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-            if (isDarkMode) {
+            navLinks.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add("active");
+                }
+            });
+
+            function updateIcon(isDarkMode) {
+                if (mobToggleButton) mobToggleButton.innerHTML = isDarkMode ? "☀️" : "🌙";
+                if (webToggleButton) webToggleButton.innerHTML = isDarkMode ? "☀️" : "🌙";
+            }
+
+            const savedTheme = localStorage.getItem("theme");
+
+            if (savedTheme == null) {
+                localStorage.setItem("theme", "light");
+                body.classList.add("light-mode");
+                updateIcon(false);
+            }
+            else if (savedTheme === "dark") {
                 body.classList.add("dark-mode");
-                body.classList.remove("light-mode");
+                updateIcon(true);
             } else {
                 body.classList.add("light-mode");
-                body.classList.remove("dark-mode");
+                updateIcon(false);
             }
-        });
-        webToggleButton.addEventListener("click", function () {
-            const isDarkMode = !(body.classList.value.includes("dark-mode"));
-            updateIcon(isDarkMode);
 
-            // Save theme preference
-            localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-            if (isDarkMode) {
-                body.classList.add("dark-mode");
-                body.classList.remove("light-mode");
-            } else {
-                body.classList.add("light-mode");
-                body.classList.remove("dark-mode");
+            if (mobToggleButton) {
+                mobToggleButton.addEventListener("click", function () {
+                    const isDarkMode = !(body.classList.value.includes("dark-mode"));
+                    updateIcon(isDarkMode);
+
+                    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+                    if (isDarkMode) {
+                        body.classList.add("dark-mode");
+                        body.classList.remove("light-mode");
+                    } else {
+                        body.classList.add("light-mode");
+                        body.classList.remove("dark-mode");
+                    }
+                });
+            }
+
+            if (webToggleButton) {
+                webToggleButton.addEventListener("click", function () {
+                    const isDarkMode = !(body.classList.value.includes("dark-mode"));
+                    updateIcon(isDarkMode);
+
+                    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+                    if (isDarkMode) {
+                        body.classList.add("dark-mode");
+                        body.classList.remove("light-mode");
+                    } else {
+                        body.classList.add("light-mode");
+                        body.classList.remove("dark-mode");
+                    }
+                });
             }
         });
-    });
-</script>
-<div class="container">
-    <div class="header" id="header">
-        <div class="logo">
+    </script>
+
+    <header id="header" class="pr-header">
+        <div class="pr-logo">
             <h4><a href="index.html">SRINIVAS MADIREDDY</a></h4>
         </div>
-        <div>
-            <nav class="navbar">
-                <button id="dark-mode-toggle-mob">
-                    🌙
-                </button>
-                <button class="menu-toggle">&#9776;</button>
-                <ul class="nav-links">
-                    <li></li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="projects.html" class="nav-link">Projects</a></li>
-                    <li><a href="education.html" class="nav-link">Education</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-            <nav class="navigation">
-                <button id="dark-mode-toggle-web">
-                    🌙
-                </button>
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="projects.html" class="nav-link">Projects</a>
-                <a href="education.html" class="nav-link">Education</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </nav>
-        </div>
-    </div>
-    <title>Lost & Found App - HCC Project</title>
-    <div class="description">
-        <section>
-            <h2>Overview</h2>
+
+        <nav class="pr-navigation">
+            <button id="dark-mode-toggle-web">🌙</button>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <a href="education.html" class="nav-link">Education</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+
+        <nav class="pr-navbar">
+            <button id="dark-mode-toggle-mob">🌙</button>
+            <button class="menu-toggle">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="education.html" class="nav-link">Education</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="pr-container">
+        <section class="pr-hero">
+            <h1>Lost & Found App</h1>
+            <p class="pr-subtitle">A Human-Centered Design Project</p>
+        </section>
+
+        <section class="pr-section">
+            <h2>Description & Motivation</h2>
             <p>
-                The Lost & Found App is designed to help students and campus members report lost items and find
-                belongings easily.
-                The goal is to create a user-friendly platform where people can quickly post lost or found items, search
-                by category or location, and securely contact others to retrieve their belongings.
+                This project aims to solve the recurring problem of misplaced items across campus.
+                The motivation comes from understanding student frustration with the existing lost-item workflow.
+                Our goal was to create a seamless experience that reduces effort, anxiety, and uncertainty.
             </p>
         </section>
 
-        <section>
-            <h2>Key Features</h2>
-            <ul>
-                <li>Post lost items with details and images</li>
-                <li>Search and filter items by category or location</li>
-                <li>Submit Found items to the nearest facility available</li>
-                <li>Admin moderation and verification</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Design Approach</h2>
+        <section class="pr-section">
+            <h2>Online Study</h2>
             <p>
-                The app is built with a human-centered design mindset — focusing on simplicity, accessibility, and clear
-                communication.
-                Feedback from peers is used to refine layouts and interactions for better usability and minimal
-                frustration.
+                We did on online study on the existing systems and how are they working and helping students. there are
+                some apps which were specific to universities. we gathered those app details from playstore and
+                appstore, performed review scrapping and found out what people think of those apps.
             </p>
-        </section>
-
-        <section>
-            <h2>Technology Stack</h2>
-            <ul>
-                <li><strong>Frontend:</strong> React Native</li>
-                <li><strong>Backend (Not Fixed yet):</strong> Python (Flask) or Node Js</li>
-                <li><strong>Database (Not Fixed yet):</strong> Firebase Firestore or SQL or MongoDB</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Project Status</h2>
-            <div class="progress">
-                <ul>
-                    <li>App concept finalized</li>
-                    <li>UI mockups created</li>
-                    <li>Basic frontend layout designed</li>
-                </ul>
+            <div class="pr-media-grid">
+                <img src="images/cloud.png" alt="word cloud" />
+                <img src="images/sent.png" alt="sentiment analysis" />
             </div>
         </section>
 
-        <section>
+        <section class="pr-section">
+            <h2>Prototyping Phase</h2>
+            <p>
+                From the review scrapping we found out that there 2 types of apps: one is dependent on AI and other is
+                pureply human. so 2 Low‑fidelity prototypes were created to visualize the workflow and gather initial
+                feedback.
+            </p>
+            <div class="pr-media-grid">
+                <img src="images/pro1.png" alt="Prototype 1" />
+                <img src="images/pro2.png" alt="Prototype 2" />
+            </div>
+        </section>
+
+        <section class="pr-section">
+            <h2>User Study 1 Results</h2>
+            <p>
+                In the first user study, participants evaluated the initial prototypes.
+                Key findings:
+            </p>
+            <ul>
+                <li>Prior Experience Shapes Motivation</li>
+                <li>Task 2 (Report Found Item) is Critical</li>
+                <li>Privacy is Important but Not Primary</li>
+                <li>Color Scheme and Branding Matter</li>
+                <li>Hybrid Approach Suggested</li>
+            </ul>
+        </section>
+
+        <section class="pr-section">
+            <h2>User Study 2 Results</h2>
+            <p>
+                The second study tested the refined prototype.
+                Improvements validated:
+            </p>
+            <ul>
+                <li>Return Method Flexibility is Highly Valued</li>
+                <li>Privacy Controls Provide Confidence</li>
+                <li>Building Location Guidance is Critical</li>
+                <li>Visual Design Supports NMSU Identity</li>
+                <li>Search and Filter Features Are Essential</li>
+                <li>Task Completion Was Intuitive</li>
+            </ul>
+        </section>
+
+        <section class="pr-section">
+            <h2>App Working Demo</h2>
+            <div class="pr-media-grid">
+                <video src="gifs/demo.mp4" muted controls></video>
+            </div>
+        </section>
+
+        <section class="pr-section">
             <h2>Team Members</h2>
             <ul>
                 <li><strong>Srinivas Madireddy</strong></li>
-                <li><strong>Aniswar</strong></li>
+                <li><strong>Aniswar Ashokkumar</strong></li>
                 <li><strong>Zarin Rahman Mohima</strong></li>
             </ul>
         </section>
-    </div>
+    </main>
 
-</div>
-<div class="footer">
-    <div class="footer-left">
-        <a href="https://linkedin.com/in/datta2907" target="_blank">LINKEDIN /</a></li>
-        <a href="https://github.com/Datta2907" target="_blank">GITHUB /</a></li>
-        <a href="https://medium.com/Datta2907" target="_blank">MEDIUM</a></li>
-    </div>
-    <div class="footer-middle">
-        <p>&copy; 2025 Srinivas Datta Madireddy All Rights Reserved.</p>
-    </div>
-    <div class="footer-right">
-        <a href="https://instagram.com/srinivas_datta" target="_blank">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://twitter.com/datta2907" target="_blank">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a href="mailto:datta297@nmsu.edu">
-            <i class="fa-regular fa-envelope"></i>
-        </a>
-    </div>
-</div>
+    <footer class="pr-footer">
+        <div class="pr-footer-left">
+            <a href="https://linkedin.com/in/datta2907" target="_blank">LINKEDIN /</a>
+            <a href="https://github.com/Datta2907" target="_blank">GITHUB /</a>
+            <a href="https://medium.com/Datta2907" target="_blank">MEDIUM</a>
+        </div>
+        <div class="pr-footer-middle">
+            <p>&copy; 2025 Srinivas Datta Madireddy All Rights Reserved.</p>
+        </div>
+        <div class="pr-footer-right">
+            <a href="https://instagram.com/srinivas_datta" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/datta2907" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:datta297@nmsu.edu"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+
+</html>
