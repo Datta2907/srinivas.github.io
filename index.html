@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <div class="mobile-tilt-shine"></div>
     <header class="pr-header" id="header">
         <div class="pr-logo">
             <h4><a href="index.html">SRINIVAS MADIREDDY</a></h4>
@@ -61,7 +60,6 @@
         <section class="pr-skills-section">
             <h2>Technologies & Skills</h2>
             <div class="pr-skills-grid">
-                <!-- Languages -->
                 <div class="pr-skill-card scroll-card">
                     <i class="fab fa-python"></i>
                     <span>Python</span>
@@ -143,6 +141,18 @@
                 <div class="pr-skill-card scroll-card">
                     <i class="fab fa-docker"></i>
                     <span>Docker</span>
+                </div>
+                <div class="pr-skill-card scroll-card">
+                    <i class="fas fa-code"></i>
+                    <span>Kotlin</span>
+                </div>
+                <div class="pr-skill-card scroll-card">
+                    <i class="fab fa-swift"></i>
+                    <span>Swift</span>
+                </div>
+                <div class="pr-skill-card scroll-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Expo</span>
                 </div>
 
                 <!-- Tools -->
@@ -261,6 +271,9 @@
         window.addEventListener("scroll", updateHeaderState);
 
         document.addEventListener("DOMContentLoaded", function () {
+            // Runs the check once on load too, not just on scroll, so a
+            // reload that restores mid-page scroll position doesn't leave
+            // the header stuck in its transparent "top of page" style.
             updateHeaderState();
 
             const heroMain = document.querySelector(".pr-hero-main");
@@ -302,11 +315,12 @@
                     setTimeout(function () { ripple.remove(); }, 600);
                 });
             });
+        });
 
+        document.addEventListener("DOMContentLoaded", function () {
             const menuToggleButton = document.querySelector(".menu-toggle");
             const navMenu = document.querySelector(".nav-links");
             const prNavbar = document.querySelector(".pr-navbar");
-
             if (menuToggleButton && navMenu) {
                 menuToggleButton.addEventListener("click", function (e) {
                     e.stopPropagation();
@@ -342,26 +356,49 @@
             window.addEventListener('scroll', handleScroll);
             handleScroll();
 
-            const shineOverlay = document.querySelector('.mobile-tilt-shine');
-            const handleTilt = (gamma, beta) => {
-                const tiltX = (gamma / 45) * 50;
-                const tiltY = (beta / 90) * 50;
-                shineOverlay.style.setProperty('--tilt-x', `${tiltX}%`);
-                shineOverlay.style.setProperty('--tilt-y', `${tiltY}%`);
-            };
+            const skillsGrid = document.querySelector('.pr-skills-grid');
+            const skillsSection = document.querySelector('.pr-skills-section');
+            const skillTiles = Array.from(document.querySelectorAll('.pr-skill-card'));
+            if (skillsGrid && skillsSection && skillTiles.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const NUM_COLUMNS = 5;
+                const SHIFT_PER_COLUMN = 40; // px of vertical offset added per column step
+                const rows = Math.ceil(skillTiles.length / NUM_COLUMNS);
+                skillsGrid.style.setProperty('--skill-rows', rows);
 
-            if (window.DeviceOrientationEvent) {
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    window.addEventListener('click', () => {
-                        DeviceOrientationEvent.requestPermission().then(state => {
-                            if (state === 'granted') {
-                                window.addEventListener('deviceorientation', e => handleTilt(e.gamma || 0, e.beta || 0));
-                            }
-                        });
-                    }, { once: true });
-                } else {
-                    window.addEventListener('deviceorientation', e => handleTilt(e.gamma || 0, e.beta || 0));
-                }
+                // grid-auto-flow:column fills column 0 top-to-bottom first,
+                // then column 1, etc, so a tile's column is just its index
+                // divided by the row count. No DOM reordering involved.
+                skillTiles.forEach((tile, i) => {
+                    const col = Math.floor(i / rows);
+                    tile.style.setProperty('--tile-shift', `${col * SHIFT_PER_COLUMN}px`);
+                });
+
+                let waveTicking = false;
+                const updateWave = () => {
+                    const vh = window.innerHeight;
+                    const rect = skillsSection.getBoundingClientRect();
+                    const sectionHeight = rect.height || 1;
+
+                    // 0 = section just entering from the bottom, 1 = section
+                    // has fully scrolled past the top of the viewport.
+                    let progress = (vh - rect.top) / (vh + sectionHeight);
+                    progress = Math.min(Math.max(progress, 0), 1);
+
+                    // Linear +1 -> -1 across the whole scroll range, passing
+                    // through 0 (flat, equal) at the midpoint.
+                    const anim = 1 - 2 * progress;
+
+                    skillsGrid.style.setProperty('--anim', anim.toFixed(3));
+                    waveTicking = false;
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!waveTicking) {
+                        requestAnimationFrame(updateWave);
+                        waveTicking = true;
+                    }
+                });
+                updateWave();
             }
         });
     </script>

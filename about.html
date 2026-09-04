@@ -10,8 +10,6 @@
 </head>
 
 <body>
-    <div class="mobile-tilt-shine"></div>
-
     <header class="pr-header" id="header">
         <div class="pr-logo">
             <h4><a href="index.html">SRINIVAS MADIREDDY</a></h4>
@@ -243,28 +241,6 @@
 
             window.addEventListener('scroll', handleScroll);
             handleScroll();
-
-            const shineOverlay = document.querySelector('.mobile-tilt-shine');
-            const handleTilt = (gamma, beta) => {
-                const tiltX = (gamma / 45) * 50;
-                const tiltY = (beta / 90) * 50;
-                shineOverlay.style.setProperty('--tilt-x', `${tiltX}%`);
-                shineOverlay.style.setProperty('--tilt-y', `${tiltY}%`);
-            };
-
-            if (window.DeviceOrientationEvent) {
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    window.addEventListener('click', () => {
-                        DeviceOrientationEvent.requestPermission().then(state => {
-                            if (state === 'granted') {
-                                window.addEventListener('deviceorientation', e => handleTilt(e.gamma || 0, e.beta || 0));
-                            }
-                        });
-                    }, { once: true });
-                } else {
-                    window.addEventListener('deviceorientation', e => handleTilt(e.gamma || 0, e.beta || 0));
-                }
-            }
         });
     </script>
 </body>

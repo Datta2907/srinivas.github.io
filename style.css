@@ -34,10 +34,6 @@ body {
     position: relative;
 }
 
-.mobile-tilt-shine {
-    display: none;
-}
-
 a {
     color: var(--accent);
     text-decoration: none;
@@ -51,11 +47,10 @@ a:hover {
 h1,
 h2,
 h3 {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     color: var(--text);
 }
 
-/* Bulging / Pop Link Hover Effect */
 .pr-pop-link {
     display: inline-block;
     font-weight: 700;
@@ -334,14 +329,16 @@ h3 {
 }
 
 .pr-skills-section h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 2rem;
     margin-bottom: 25px;
 }
 
 .pr-skills-grid {
+    --anim: 0;
+    --skill-rows: 2;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 20vw, 180px), 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
@@ -371,10 +368,35 @@ h3 {
     pointer-events: none;
 }
 
+/* Mobile default: plain static tiles, same as before this whole effect existed */
 .pr-skill-card.in-view:hover {
     transform: translateY(-8px) scale(1.02);
     border-color: var(--accent-light);
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 781px) {
+    .pr-skills-grid {
+        grid-auto-flow: column;
+        grid-template-columns: none;
+        grid-auto-columns: minmax(140px, 1fr);
+        grid-template-rows: repeat(var(--skill-rows), 1fr);
+        justify-content: center;
+    }
+
+    .pr-skill-card.in-view {
+        /* --tile-shift is set once per tile in JS, based on which of the
+           5 columns it lands in (grid-auto-flow:column keeps DOM order
+           intact, nothing is reshuffled). --anim is set on the parent
+           .pr-skills-grid on scroll: +1 at entry, 0 when settled in view,
+           -1 on exit, so every tile in a column reads the same value and
+           moves together. */
+        transform: translateY(calc(var(--tile-shift, 0px) * var(--anim, 0)));
+    }
+
+    .pr-skill-card.in-view:hover {
+        transform: translateY(calc(var(--tile-shift, 0px) * var(--anim, 0))) translateY(-8px) scale(1.02);
+    }
 }
 
 .pr-skill-card.in-view:hover::after {
@@ -417,7 +439,7 @@ h3 {
 }
 
 .pr-timeline h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 2rem;
     margin-bottom: 30px;
 }
@@ -494,7 +516,7 @@ h3 {
 .pr-date {
     font-size: 0.85rem;
     color: var(--accent-light);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: 600;
 }
 
@@ -752,17 +774,16 @@ h3 {
 }
 
 .pr-intro {
-    text-align: left;
+    text-align: center;
     padding: 30px;
     background: var(--surface);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     margin-bottom: 40px;
-    border: 1px solid var(--border);
 }
 
 .pr-intro h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 2rem;
     border-bottom: none;
     margin-bottom: 15px;
@@ -793,7 +814,7 @@ h3 {
 }
 
 .pr-fun-facts li {
-    padding: 12px 18px;
+    padding: 10px 15px;
     background: var(--bg);
     border-radius: 8px;
     border: 1px solid var(--border);
@@ -803,23 +824,21 @@ h3 {
 
 .pr-contact-about {
     text-align: center;
-    margin-top: 20px;
-    padding: 20px;
+    padding: 30px;
     background: var(--surface);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    border: 1px solid var(--border);
 }
 
 .pr-contact-about h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 2rem;
     border-bottom: none;
     margin-bottom: 15px;
 }
 
 .pr-contact-about a {
-    margin: 0 5px;
+    margin: 0 15px;
     font-weight: 600;
 }
 
@@ -832,11 +851,11 @@ h3 {
 }
 
 .pr-contact-grid {
-    padding: 20px 0;
+    padding: 40px 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    max-width: 900px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -864,12 +883,12 @@ h3 {
 
 .pr-icon-box i {
     font-size: 1.2rem;
-    color: #ffffff;
+    color: var(--surface);
 }
 
 .pr-contact-item p {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: var(--text);
 }
 
@@ -909,24 +928,6 @@ h3 {
 }
 
 @media (max-width: 780px) {
-    .mobile-tilt-shine {
-        display: block;
-        position: fixed;
-        top: -50%;
-        left: -50%;
-        width: 200vw;
-        height: 200vh;
-        pointer-events: none;
-        z-index: 1;
-        background: linear-gradient(115deg,
-                transparent 30%,
-                rgba(255, 255, 255, 0.02) 42%,
-                rgba(255, 255, 255, 0.12) 50%,
-                rgba(255, 255, 255, 0.02) 58%,
-                transparent 70%);
-        transform: translate(var(--tilt-x, 0%), var(--tilt-y, 0%));
-        transition: transform 0.1s cubic-bezier(0.1, 0.5, 0.1, 1);
-    }
 
     .pr-container {
         padding-top: 110px;
@@ -965,16 +966,16 @@ h3 {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: calc(100% + 12px);
-        right: 0;
+        top: 65px;
+        right: 20px;
         background: rgba(26, 26, 46, 0.95);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-        min-width: 200px;
-        z-index: 100;
+        box-shadow: var(--shadow);
+        min-width: 180px;
+        z-index: 99;
         padding: 10px;
         margin: 0;
         list-style: none;
@@ -995,21 +996,21 @@ h3 {
     .nav-links .nav-link {
         color: var(--muted);
         display: block;
-        padding: 10px 16px;
-        border-radius: 8px;
+        padding: 8px 12px;
+        border-radius: 6px;
         font-weight: 600;
         text-align: left;
         transition: background 0.2s ease, color 0.2s ease;
     }
 
     .nav-links .nav-link:hover {
-        color: #ffffff;
+        color: var(--text);
         background: rgba(255, 255, 255, 0.08);
     }
 
     .nav-links .nav-link.active {
         background: var(--accent);
-        color: #ffffff;
+        color: var(--text);
     }
 
     .nav-links .nav-link.active::after {
@@ -1025,10 +1026,6 @@ h3 {
 
     .pr-hero-actions {
         justify-content: center;
-    }
-
-    .pr-skills-grid {
-        grid-template-columns: repeat(2, 1fr);
     }
 
     .pr-footer {
